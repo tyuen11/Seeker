@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row" [ngStyle]="{'margin': '30px 40px'}" cdkDropListGroup>
+    <div class="col bordered" [ngStyle]="{'margin': '30px 40px'}" *ngFor="let section of sections">
+      <status-container [name]="section"></status-container>
+    </div>
+  </div>
+</div>
+<!-- <mat-grid-list cols="3" [ngStyle]="{'margin': '30px 40px 0'}" [gutterSize]="'40px'">
+    <mat-grid-tile class="bordered" *ngFor="let section of sections">
+      <app-status [name]="section"></app-status>
+    </mat-grid-tile>
+  </mat-grid-list> -->

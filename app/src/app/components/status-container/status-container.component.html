@@ -1,0 +1,11 @@
+<div>
+  <div id='status-header' class='container center'>
+    <h1 id='section-name'>{{name}}</h1>
+    <h3 id='jobs'>5 Jobs</h3>
+  </div>
+  <div cdkDropList id={{name}} [cdkDropListData]="jobs" (cdkDropListDropped)="drop($event)">
+    <div class="mt-2 mb-2" *ngFor="let job of jobs" cdkDrag>
+      <job [job]=job></job>
+    </div>
+  </div>
+</div>
