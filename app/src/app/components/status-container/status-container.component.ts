@@ -19,24 +19,30 @@ export class StatusContainerComponent {
     this.jobs = [
       {
         company: 'Facebook',
-        position: 'DevOps'
+        position: 'DevOps',
+        url: 'https://facebook.com'
       },
       {
         company: 'Google',
-        position: 'SWE'
+        position: 'SWE',
+        url: 'https://google.com'
+
       },
       {
         company: 'Twitter',
-        position: 'SASD'
+        position: 'SASD',
+        url: 'https://twitter.com'
       },
     ];
 
   }
 
   drop(event: CdkDragDrop<Job[]>) {
+    console.log(event.previousContainer.id, event.container.id);
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
+      console.log('transfer', this.jobs)
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,

@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row" [ngStyle]="{'margin': '30px 40px'}" cdkDropListGroup>
-    <div class="col bordered" [ngStyle]="{'margin': '30px 40px'}" *ngFor="let section of sections">
+    <div class="col bordered section-border" [ngStyle]="{'margin': '30px 40px'}" *ngFor="let section of sections">
       <status-container [name]="section"></status-container>
     </div>
   </div>
