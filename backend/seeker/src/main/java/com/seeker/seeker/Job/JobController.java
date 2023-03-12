@@ -19,6 +19,11 @@ public class JobController {
         return jobService.getAllJobs();
     }
 
+    @GetMapping
+    public Job getJob(Long id) {
+        return jobService.getJob(id);
+    }
+
     @PostMapping
     public void addJob(@Valid @RequestBody Job job) {
         jobService.addJob(job);

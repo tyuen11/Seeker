@@ -16,6 +16,14 @@ public class JobService {
         return jobRepository.findAll();
     }
 
+    public Job getJob(Long id) {
+        if (!jobRepository.existsById(id)) {
+            throw new UserNotFoundException("Job with id " + id + " does not exist");
+        }
+        return jobRepository.findById((id)).get();
+    
+    }
+
     public void addJob(Job job) {
         Boolean existsJob = jobRepository.existsById(job.getId());
 
@@ -27,11 +35,11 @@ public class JobService {
         jobRepository.save(job);
     }
 
-    public void deleteJob(Long jobId) {
-        if (!jobRepository.existsById(jobId)) {
-            throw new UserNotFoundException("Job with id " + jobId + " does not exist");
+    public void deleteJob(Long id) {
+        if (!jobRepository.existsById(id)) {
+            throw new UserNotFoundException("Job with id " + id + " does not exist");
         }
-        jobRepository.deleteById((jobId));
+        jobRepository.deleteById((id));
     }
 
 }
