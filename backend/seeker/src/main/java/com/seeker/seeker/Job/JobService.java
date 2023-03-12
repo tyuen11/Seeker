@@ -1,0 +1,37 @@
+package com.seeker.seeker.Job;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.List;
+
+import com.seeker.seeker.SeekerUser.exceptions.*;
+
+@Service
+public class JobService {
+
+    @Autowired
+    private JobRepository jobRepository;
+
+    public List<Job> getAllJobs() {
+        return jobRepository.findAll();
+    }
+
+    public void addJob(Job job) {
+        Boolean existsJob = jobRepository.existsById(job.getId());
+
+        if (existsJob) {
+            throw new BadRequestException(
+                    "Job " + job.getId() + " taken");
+        }
+
+        jobRepository.save(job);
+    }
+
+    public void deleteJob(Long jobId) {
+        if (!jobRepository.existsById(jobId)) {
+            throw new UserNotFoundException("Job with id " + jobId + " does not exist");
+        }
+        jobRepository.deleteById((jobId));
+    }
+
+}
