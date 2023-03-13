@@ -1,5 +1,7 @@
 package com.seeker.seeker.SeekerUser;
  
+import org.springframework.beans.factory.annotation.Value;
+
 import jakarta.persistence.*;
 
 
@@ -20,6 +22,8 @@ public class SeekerUser {
 	private Long id;
     private String name;
     private String email;
+	
+	@Value("${containers:{}}")
 	private String[] containers;
 
 

@@ -16,6 +16,13 @@ public class SeekerUserService {
         return userRepository.findAll();
     }
 
+    public SeekerUser getUser(Long id) {
+        if (!userRepository.existsById(id)) {
+            throw new UserNotFoundException("User with id " + id + " does not exist");
+        }
+        return userRepository.findById((id)).get();
+    }
+
     public void addUser(SeekerUser user) {
         Boolean existsEmail = userRepository.selectExistsEmail(user.getEmail());
         if (existsEmail) {

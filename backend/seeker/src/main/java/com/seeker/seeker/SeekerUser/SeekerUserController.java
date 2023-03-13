@@ -20,8 +20,17 @@ public class SeekerUserController {
     }
 
     @PostMapping
-    public void addStudent(@Valid @RequestBody SeekerUser user) {
-        System.out.println(user);
+    public SeekerUser getUser(@Valid @RequestBody Long id) {
+        return userService.getUser(id);
+    }
+
+    @PostMapping(value="/add")
+    public void addUser(@Valid @RequestBody SeekerUser user) {
         userService.addUser(user);
+    }
+
+    @DeleteMapping(value="/delete")
+    public void removeUser(@Valid @RequestBody Long id) {
+        userService.deleteUser(id);
     }
 }

@@ -11,10 +11,10 @@ public class SeekerUserConfig {
     CommandLineRunner commandLineRunner(SeekerUserRepository repo) {
         return args -> {
             SeekerUser user = new SeekerUser(
-                    "Tim Yuen",
-                    "timothy.yuen11@gmail.com");
+                    "Test Testt",
+                    "test.testt@gmail.com");
+            // repo.save(user);
         };
-
     }
 
 }
