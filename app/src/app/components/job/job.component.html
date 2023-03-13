@@ -1,14 +1,18 @@
-<mat-card id='job' class='card-width' [ngStyle]="{'background-color': '#CB8AFF'}">
-    <mat-card-header>
-        <mat-card-title>{{job.position}}</mat-card-title>
-        <mat-card-subtitle>{{job.company}}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-actions>
-        <button mat-button>
-            <mat-icon aria-hidden="false" aria-label="Delete Job" fontIcon="delete"></mat-icon>
-        </button>
-        <button mat-button (click)="goToUrl()">
-            <mat-icon aria-hidden="false" aria-label="Delete Job" fontIcon="link"/>
-        </button>
-      </mat-card-actions>
+<mat-card id='job' class='card-width container mb-1' [ngStyle]="{'background-color': '#CB8AFF'}">
+    <div class="row">
+        <mat-card-header class="col">
+            <mat-card-title>{{job.position}}</mat-card-title>
+            <mat-card-subtitle>{{job.company}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions class="col">
+            <div class="row container" >
+                <button mat-button class="col job-button">
+                    <mat-icon aria-hidden="false" aria-label="Delete Job" fontIcon="delete"></mat-icon>
+                </button>
+                <button mat-button class="col job-button" (click)="goToUrl()">
+                    <mat-icon aria-hidden="false" aria-label="Delete Job" fontIcon="link" />
+                </button>
+            </div>
+        </mat-card-actions>
+    </div>
 </mat-card>
