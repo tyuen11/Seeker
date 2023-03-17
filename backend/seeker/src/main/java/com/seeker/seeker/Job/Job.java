@@ -23,14 +23,16 @@ public class Job {
     private String position;
     private Date dateApplied;
     private String status;
+    private String container;
 
     public Job(){ super(); }
 
-    public Job(String companyName, String position, Date dateApplied, String status) {
+    public Job(String companyName, String position, Date dateApplied, String status, String container) {
         this.companyName = companyName;
         this.position = position;
         this.dateApplied = dateApplied;
         this.status = status;
+        this.container = container;
     }
 
     public Long getId() {
@@ -71,5 +73,13 @@ public class Job {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getContainer() {
+        return container;
+    }
+
+    public void setContainer(String container) {
+        this.container = container;
     }
 }

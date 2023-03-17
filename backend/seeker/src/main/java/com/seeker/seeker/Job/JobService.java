@@ -12,12 +12,8 @@ public class JobService {
     @Autowired
     private JobRepository jobRepository;
 
-    public List<Job> getAllJobs() {
-        return jobRepository.findAll();
-    }
-
     public Job getJob(Long id) {
-        if (!jobRepository.existsById(id)) {
+        if (!jobRepository.selectExistsJob(id)) {
             throw new UserNotFoundException("Job with id " + id + " does not exist");
         }
         return jobRepository.findById((id)).get();
@@ -25,7 +21,7 @@ public class JobService {
     }
 
     public void addJob(Job job) {
-        Boolean existsJob = jobRepository.existsById(job.getId());
+        Boolean existsJob = jobRepository.selectExistsJob(job.getId());
 
         if (existsJob) {
             throw new BadRequestException(
@@ -33,6 +29,13 @@ public class JobService {
         }
 
         jobRepository.save(job);
+    }
+
+    public void editJob(Long id, String attribute) {
+        if (!jobRepository.selectExistsJob(id)) {
+            throw new UserNotFoundException("Job with id " + id + " does not exist");
+        }
+        
     }
 
     public void deleteJob(Long id) {

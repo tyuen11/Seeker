@@ -14,12 +14,7 @@ public class JobController {
     @Autowired
     private JobService jobService;
 
-    @GetMapping
-    public List<Job> getAllJobs() {
-        return jobService.getAllJobs();
-    }
-
-    @GetMapping
+    @PostMapping("/{id}")
     public Job getJob(Long id) {
         return jobService.getJob(id);
     }
