@@ -12,10 +12,12 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CoreModule } from './core';
-// import { JobModalComponent } from './components/modals/jobModal/job-modal/job-modal.component';
+import { AddJobModalComponent } from './components/modals/add-job-modal/add-job-modal.component';
 
 import { UserEffects } from './core/effects/user.effects';
+import { TextfieldComponent } from './components/common/textfield/textfield.component';
 
 
 @NgModule({
@@ -24,7 +26,8 @@ import { UserEffects } from './core/effects/user.effects';
     HomeComponent,
     StatusContainerComponent,
     JobComponent,
-    // JobModalComponent
+    AddJobModalComponent,
+    TextfieldComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +36,9 @@ import { UserEffects } from './core/effects/user.effects';
     MaterialModule,
     CoreModule,
     EffectsModule.forRoot([UserEffects]),
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import {MatDialog} from '@angular/material/dialog';
 
 import { Job } from '../../interfaces';
+import { AddJobModalComponent } from '../modals/add-job-modal/add-job-modal.component';
+
 
 
 @Component({
@@ -15,7 +18,7 @@ export class StatusContainerComponent {
 
   public jobs: Job[];
 
-  constructor(){
+  constructor(public dialog: MatDialog){
     this.jobs = [
       {
         company: 'Facebook',
@@ -51,5 +54,14 @@ export class StatusContainerComponent {
       );
     }
   }
+  
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddJobModalComponent, {
+      data: {},
+    });
 
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed', result);
+    // });
+  }
 }

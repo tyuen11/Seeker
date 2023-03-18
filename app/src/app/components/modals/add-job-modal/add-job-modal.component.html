@@ -1,0 +1,13 @@
+<h1 mat-dialog-title class="center">Add Job</h1>
+<div mat-dialog-content>
+    <div class="mb-2">
+        <textfield text="Company" errorMessage="Please enter a value" name="company"></textfield>
+    </div>
+    <div class="my-3">
+        <textfield text="Job Title" errorMessage="Please enter a value" name="jobTitle"></textfield>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button>Save Job</button>
+</div>

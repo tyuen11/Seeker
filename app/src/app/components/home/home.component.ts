@@ -3,7 +3,7 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { SeekerState } from 'src/app/core/store/reducers';
-import { selectUserContainers, selectUser, User, getContainers, getUser } from 'src/app/core/store/user';
+import { selectUserContainers, getUser } from 'src/app/core/store/user';
 
 @Component({
   selector: 'home',

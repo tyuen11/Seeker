@@ -4,10 +4,10 @@
     <h3 id='jobs'>{{jobs.length}} Jobs</h3>
   </div>
   <div>
-    <button mat-raised-button class="add-btn">Add</button>
+    <button mat-raised-button class="add-btn" (click)="openDialog()">Add</button>
   </div>
   <div cdkDropList class="drop-box" id={{name}} [cdkDropListData]="jobs" (cdkDropListDropped)="drop($event)" >
-    <div class="mt-2 mb-2 j-box " id='asdf' *ngFor="let job of jobs" cdkDrag>
+    <div class="mt-2 mb-2 j-box"  *ngFor="let job of jobs" cdkDrag>
       <job [job]=job></job>
     </div>
   </div>
