@@ -18,6 +18,8 @@ import { AddJobModalComponent } from './components/modals/add-job-modal/add-job-
 
 import { UserEffects } from './core/effects/user.effects';
 import { TextfieldComponent } from './components/common/textfield/textfield.component';
+import { DatetimePickerComponent } from './components/common/datetime-picker/datetime-picker.component';
+import { JobEffects } from './core/effects/job.effects';
 
 
 @NgModule({
@@ -28,6 +30,7 @@ import { TextfieldComponent } from './components/common/textfield/textfield.comp
     JobComponent,
     AddJobModalComponent,
     TextfieldComponent,
+    DatetimePickerComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,7 @@ import { TextfieldComponent } from './components/common/textfield/textfield.comp
     NoopAnimationsModule,
     MaterialModule,
     CoreModule,
-    EffectsModule.forRoot([UserEffects]),
+    EffectsModule.forRoot([UserEffects, JobEffects]),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule

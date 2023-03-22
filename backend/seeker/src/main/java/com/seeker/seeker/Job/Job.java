@@ -1,7 +1,5 @@
 package com.seeker.seeker.Job;
 
-import java.util.Date;
-
 import jakarta.persistence.*;
 
 
@@ -21,18 +19,19 @@ public class Job {
     private Long id;
     private String companyName;
     private String position;
-    private Date dateApplied;
+    private String dateApplied;
     private String status;
-    private String container;
+    private String url;
+    private Long userId;
 
     public Job(){ super(); }
 
-    public Job(String companyName, String position, Date dateApplied, String status, String container) {
+    public Job(String companyName, String position, String status, String url, String dateApplied) {
         this.companyName = companyName;
         this.position = position;
-        this.dateApplied = dateApplied;
         this.status = status;
-        this.container = container;
+        this.dateApplied = dateApplied;
+        this.url = url;
     }
 
     public Long getId() {
@@ -59,11 +58,11 @@ public class Job {
         this.position = position;
     }
 
-    public Date getDateApplied() {
+    public String getDateApplied() {
         return dateApplied;
     }
 
-    public void setDateApplied(Date dateApplied) {
+    public void setDateApplied(String dateApplied) {
         this.dateApplied = dateApplied;
     }
 
@@ -75,11 +74,19 @@ public class Job {
         this.status = status;
     }
 
-    public String getContainer() {
-        return container;
+    public String getUrl() {
+        return url;
     }
 
-    public void setContainer(String container) {
-        this.container = container;
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+    
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

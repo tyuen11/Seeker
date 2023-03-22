@@ -1,7 +1,5 @@
 package com.seeker.seeker.SeekerUser;
  
-import org.springframework.beans.factory.annotation.Value;
-
 import jakarta.persistence.*;
 
 

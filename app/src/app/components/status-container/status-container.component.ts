@@ -14,7 +14,8 @@ import { AddJobModalComponent } from '../modals/add-job-modal/add-job-modal.comp
 })
 
 export class StatusContainerComponent {
-  @Input() name!: String;
+  @Input() name!: string;
+  @Input() currentUser!: number
 
   public jobs: Job[];
 
@@ -23,18 +24,27 @@ export class StatusContainerComponent {
       {
         company: 'Facebook',
         position: 'DevOps',
-        url: 'https://facebook.com'
+        url: 'https://facebook.com',
+        dateApplied: 1,
+        status: "Applied",
+        uid: 1,
       },
       {
         company: 'Google',
         position: 'SWE',
-        url: 'https://google.com'
+        url: 'https://google.com',
+        dateApplied: 1,
+        status: "Applied",
+        uid: 1,
 
       },
       {
         company: 'Twitter',
         position: 'SASD',
-        url: 'https://twitter.com'
+        url: 'https://twitter.com',
+        dateApplied: 1,
+        status: "Applied",
+        uid: 1,
       },
     ];
 
@@ -57,7 +67,7 @@ export class StatusContainerComponent {
   
   openDialog(): void {
     const dialogRef = this.dialog.open(AddJobModalComponent, {
-      data: {},
+      data: {status: this.name, currentUser: this.currentUser},
     });
 
     // dialogRef.afterClosed().subscribe(result => {

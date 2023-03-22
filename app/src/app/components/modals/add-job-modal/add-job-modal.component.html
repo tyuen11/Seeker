@@ -1,13 +1,39 @@
 <h1 mat-dialog-title class="center">Add Job</h1>
 <div mat-dialog-content>
     <div class="mb-2">
-        <textfield text="Company" errorMessage="Please enter a value" name="company"></textfield>
+        <textfield 
+            text="Company" 
+            errorMessage="Please enter a value" 
+            name="company" 
+            [control]="jobForm.company"
+        />
     </div>
     <div class="my-3">
-        <textfield text="Job Title" errorMessage="Please enter a value" name="jobTitle"></textfield>
+        <textfield 
+            text="Job Title" 
+            errorMessage="Please enter a value" 
+            name="jobTitle" 
+            [control]="jobForm.jobTitle"
+        />
+    </div>
+    <div class="my-3">
+        <textfield 
+        text="Post Url" 
+        name="postUrl" 
+        [control]="jobForm.postUrl"
+        />
+    </div>
+    <div>
+        <mat-form-field>
+            <input matInput 
+                type="datetime-local" 
+                placeholder="start date"
+                [formControl]="jobForm.dateApplied"
+            >
+          </mat-form-field>
     </div>
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button>Save Job</button>
+    <button mat-button (click)="onSubmit()">Save Job</button>
 </div>

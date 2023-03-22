@@ -1,13 +1,15 @@
 import { createReducer, on } from '@ngrx/store';
-import { getContainers, getUserSuccess } from './user.actions';
+import { getUserSuccess } from './user.actions';
 
 export interface User {
+    id: number;
     containers: string[];
     name: string;
     email: string;
 }
 
 const initialState: User = {
+    id: -1,
     containers: [],
     name: "",
     email: ""
@@ -15,6 +17,5 @@ const initialState: User = {
 
 export const userReducer = createReducer(
     initialState,
-    on(getContainers, (state) => ({ ...state })),
     on(getUserSuccess, (state, { user }) => ({ ...user })),
 );
