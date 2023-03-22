@@ -1,7 +1,5 @@
 package com.seeker.seeker.SeekerUser;
  
-import org.springframework.beans.factory.annotation.Value;
-
 import jakarta.persistence.*;
 
 
@@ -23,8 +21,11 @@ public class SeekerUser {
     private String name;
     private String email;
 	
-	@Value("${containers:{}}")
-	private String[] containers;
+	// @Value("#{'${containers:Applied, Rejected, Accepted}'.split(',')}")
+	// @Value("#{${my.app.contains:}Applied, Rejected, Accepted}")
+	// @Value("#{['Applied', 'Rejected', 'Accepted'].split(',')}")
+	// @Value("${containersArray}")
+	private String[] containers = {"Applied", "Rejected", "Accepted", "To Apply"};
 
 
 	public SeekerUser() { super(); }

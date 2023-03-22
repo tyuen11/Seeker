@@ -1,7 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import {MatDialog} from '@angular/material/dialog';
 
 import { Job } from '../../interfaces';
+import { AddJobModalComponent } from '../modals/add-job-modal/add-job-modal.component';
+
 
 
 @Component({
@@ -11,27 +14,37 @@ import { Job } from '../../interfaces';
 })
 
 export class StatusContainerComponent {
-  @Input() name!: String;
+  @Input() name!: string;
+  @Input() currentUser!: number
 
   public jobs: Job[];
 
-  constructor(){
+  constructor(public dialog: MatDialog){
     this.jobs = [
       {
         company: 'Facebook',
         position: 'DevOps',
-        url: 'https://facebook.com'
+        url: 'https://facebook.com',
+        dateApplied: 1,
+        status: "Applied",
+        uid: 1,
       },
       {
         company: 'Google',
         position: 'SWE',
-        url: 'https://google.com'
+        url: 'https://google.com',
+        dateApplied: 1,
+        status: "Applied",
+        uid: 1,
 
       },
       {
         company: 'Twitter',
         position: 'SASD',
-        url: 'https://twitter.com'
+        url: 'https://twitter.com',
+        dateApplied: 1,
+        status: "Applied",
+        uid: 1,
       },
     ];
 
@@ -51,5 +64,14 @@ export class StatusContainerComponent {
       );
     }
   }
+  
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddJobModalComponent, {
+      data: {status: this.name, currentUser: this.currentUser},
+    });
 
+    // dialogRef.afterClosed().subscribe(result => {
+    //   console.log('The dialog was closed', result);
+    // });
+  }
 }

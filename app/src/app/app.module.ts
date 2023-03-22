@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,7 +11,15 @@ import { JobComponent } from './components/job/job.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { CoreModule } from './core';
+import { AddJobModalComponent } from './components/modals/add-job-modal/add-job-modal.component';
+
+import { UserEffects } from './core/effects/user.effects';
+import { TextfieldComponent } from './components/common/textfield/textfield.component';
+import { DatetimePickerComponent } from './components/common/datetime-picker/datetime-picker.component';
+import { JobEffects } from './core/effects/job.effects';
 
 
 @NgModule({
@@ -17,7 +27,10 @@ import { CoreModule } from './core';
     AppComponent,
     HomeComponent,
     StatusContainerComponent,
-    JobComponent
+    JobComponent,
+    AddJobModalComponent,
+    TextfieldComponent,
+    DatetimePickerComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,6 +38,10 @@ import { CoreModule } from './core';
     NoopAnimationsModule,
     MaterialModule,
     CoreModule,
+    EffectsModule.forRoot([UserEffects, JobEffects]),
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
