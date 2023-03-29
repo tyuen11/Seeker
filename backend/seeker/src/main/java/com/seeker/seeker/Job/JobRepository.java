@@ -15,4 +15,7 @@ public interface JobRepository extends JpaRepository<Job, Long> {
     )
     Boolean selectExistsJob(Long id);
 
+    @Query("SELECT j FROM Job j WHERE j.userId = ?1")
+    Job[] selectUserJobs(Long uid);
+
 }

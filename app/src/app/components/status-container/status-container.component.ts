@@ -16,37 +16,10 @@ import { AddJobModalComponent } from '../modals/add-job-modal/add-job-modal.comp
 export class StatusContainerComponent {
   @Input() name!: string;
   @Input() currentUser!: number
+  @Input() jobs!: Job[]
 
-  public jobs: Job[];
 
   constructor(public dialog: MatDialog){
-    this.jobs = [
-      {
-        company: 'Facebook',
-        position: 'DevOps',
-        url: 'https://facebook.com',
-        dateApplied: 1,
-        status: "Applied",
-        uid: 1,
-      },
-      {
-        company: 'Google',
-        position: 'SWE',
-        url: 'https://google.com',
-        dateApplied: 1,
-        status: "Applied",
-        uid: 1,
-
-      },
-      {
-        company: 'Twitter',
-        position: 'SASD',
-        url: 'https://twitter.com',
-        dateApplied: 1,
-        status: "Applied",
-        uid: 1,
-      },
-    ];
 
   }
 
@@ -69,6 +42,8 @@ export class StatusContainerComponent {
     const dialogRef = this.dialog.open(AddJobModalComponent, {
       data: {status: this.name, currentUser: this.currentUser},
     });
+
+    console.log(this.jobs)
 
     // dialogRef.afterClosed().subscribe(result => {
     //   console.log('The dialog was closed', result);

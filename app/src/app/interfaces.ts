@@ -1,8 +1,16 @@
 export interface Job {
-    company: string;
-    position: string;
-    url: string;
-    dateApplied: number,
-    status: string,
-    uid: number
-  }
+  companyName: string;
+  position: string;
+  url: string;
+  dateApplied: number,
+  status: string,
+  uid: number
+}
+
+
+export interface User {
+  id: number;
+  containers: string[];
+  name: string;
+  email: string;
+}

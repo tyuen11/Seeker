@@ -3,7 +3,7 @@ import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Store } from "@ngrx/store";
 import { catchError, map, mergeMap, of, switchMap } from "rxjs";
 import { JobService } from "../services/job.service";
-import { addJob, getJobSuccess } from "../store/job";
+import { addJob, getJobs, getJobsSuccess, addJobSuccess } from "../store/job";
 import { SeekerState } from "../store/reducers";
 
 @Injectable()
@@ -17,15 +17,27 @@ export class JobEffects {
     addJob$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(addJob),
-            switchMap(action => {
-                console.log(action);
+            mergeMap(action => {
                 return this.jobService.addJob(action.job).pipe(
                     map(res => {
-                        console.log(res);
-                        return getJobSuccess({payload: res})
+                        return addJobSuccess({ payload: res })
                     })
                 )
             })
         )
     });
+
+    getJobs$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(getJobs),
+            mergeMap(action => {
+                return this.jobService.getJobs(action.uid).pipe(
+                    map(res => {
+                            return getJobsSuccess( {jobs: res })
+                        }
+                    )
+                )
+            })
+        )
+    })
 }

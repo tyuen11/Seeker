@@ -45,7 +45,7 @@ export class AddJobModalComponent implements OnInit{
   onSubmit(): void {
     let { company, jobTitle, dateApplied, postUrl } = this.jobForm;
     let job: Job = {
-      company: company.value,
+      companyName: company.value,
       position: jobTitle.value,
       dateApplied: dateApplied.value,
       status: this.status,
@@ -53,9 +53,10 @@ export class AddJobModalComponent implements OnInit{
       uid: this.currentUser
     };
 
-    console.log(job);
 
     this.store.dispatch(addJob({job: job}));
+    this.dialogRef.close();
+
 
   }
 }

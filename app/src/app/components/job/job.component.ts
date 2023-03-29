@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AddJobModalComponent } from '../modals/add-job-modal/add-job-modal.component';
@@ -11,11 +11,16 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./job.component.css']
 })
 
-export class JobComponent {
+export class JobComponent implements OnInit {
   @Input() job!: Job;
 
   constructor(private router: Router, private jobModal: MatDialog) { }
 
+
+  ngOnInit(): void {
+    console.log(this.job.companyName);
+  }
+  
   goToUrl() {
     // let route: string[] = ['/' + this.job.url];
     console.log(this.job.url);

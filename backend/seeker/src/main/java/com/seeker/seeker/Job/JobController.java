@@ -24,4 +24,9 @@ public class JobController {
         System.out.println(job);
         jobService.addJob(job);
     }
+
+    @PostMapping(value="/all")
+    public Job[] getJobs(@Valid @RequestParam(name="uid") Long uid) {
+        return jobService.getJobs(uid);
+    }
 }

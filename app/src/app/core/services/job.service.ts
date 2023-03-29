@@ -27,7 +27,7 @@ export class JobService {
         console.log(job);
         
         const payload = {
-            companyName: job.company,
+            companyName: job.companyName,
             dateApplied: job.dateApplied,
             position: job.position,
             status: job.status,
@@ -35,6 +35,17 @@ export class JobService {
             userId: job.uid
         }
         return this.http.post<Job>(this.url + "/add", payload, httpOptions)
+    }
+
+    getJobs(uid: number) {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "localhost:52376"
+            })
+        };
+        const param = "?uid=" + uid;
+        return this.http.post<Job>(this.url + "/all" + param, {} , httpOptions)
     }
 
 
