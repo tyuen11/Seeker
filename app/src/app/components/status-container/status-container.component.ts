@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 
 import { Job } from '../../interfaces';
 import { AddJobModalComponent } from '../modals/add-job-modal/add-job-modal.component';
+import { getJobs } from 'src/app/core/store/job';
 
 
 
@@ -13,14 +14,18 @@ import { AddJobModalComponent } from '../modals/add-job-modal/add-job-modal.comp
   styleUrls: ['./status-container.component.css', '../../app.component.css']
 })
 
-export class StatusContainerComponent {
+export class StatusContainerComponent implements OnChanges {
   @Input() name!: string;
   @Input() currentUser!: number
   @Input() jobs!: Job[]
 
 
-  constructor(public dialog: MatDialog){
+  constructor(public dialog: MatDialog) {
 
+  }
+
+  ngOnChanges(): void {
+    this.jobs = this.jobs?.filter(j => j.status === this.name);
   }
 
   drop(event: CdkDragDrop<Job[]>) {
@@ -37,16 +42,16 @@ export class StatusContainerComponent {
       );
     }
   }
-  
+
   openDialog(): void {
     const dialogRef = this.dialog.open(AddJobModalComponent, {
-      data: {status: this.name, currentUser: this.currentUser},
+      data: { status: this.name, currentUser: this.currentUser },
     });
 
     console.log(this.jobs)
 
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log('The dialog was closed', result);
-    // });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed', result);
+    });
   }
 }

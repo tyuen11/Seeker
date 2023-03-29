@@ -30,5 +30,4 @@ export const getJobsSuccess = createAction(
 
 export const addJobSuccess = createAction(
     ActionTypes.ADD_JOB_SUCCESS,
-    props<{payload: any}>()
 )

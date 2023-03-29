@@ -18,14 +18,11 @@ export class JobComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log(this.job.companyName);
+    
   }
   
   goToUrl() {
-    // let route: string[] = ['/' + this.job.url];
-    console.log(this.job.url);
-    // this.router.navigate(route);
-    document.location.href = this.job.url;
+    window.location.href = 'https://' + this.job.url; //Todo: Need to add https to the actual db
   }
 
   openDialog(): void {
@@ -33,8 +30,5 @@ export class JobComponent implements OnInit {
       data: {},
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
   }
 }

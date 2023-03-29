@@ -7,10 +7,6 @@ const initialState: Job[] = [];
 
 export const jobReducer = createReducer(
     initialState,
-    // on(getJobs, (state, { jobs }) => ({...state, jobs})),
-    // on(addJobSuccess, (state, { payload }) => ({
-    //     ...state,
-    //     payload
-    // })),
+    on(addJobSuccess, (state) => (state)),
     on(getJobsSuccess, (state, { jobs }) => (jobs))
 );
