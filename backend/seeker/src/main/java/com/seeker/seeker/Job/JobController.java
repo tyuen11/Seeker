@@ -29,6 +29,7 @@ public class JobController {
     @ResponseStatus(HttpStatus.OK)
     public String addJob(@Valid @RequestBody Job job) throws JsonProcessingException {
         // Response res = new Response(true, null, "Adding job was successful");
+        jobService.addJob(job);
         Map<String, Object> res = new HashMap<>();
         res.put("success", true);
         res.put("data", null);
