@@ -36,16 +36,17 @@ export class HomeComponent implements OnInit {
 
     this.uidObs$ = this.store.select(selectUserId);
     this.uidObs$.subscribe(currentUser => {
-      console.log('observing', currentUser);
+      // console.log('observing', currentUser);
       this.currentUser = currentUser;
     })
 
     this.jobsObs$ = this.store.select(selectJobs);
     this.jobsObs$.subscribe(jobs => {
-        console.log('observing jobs', jobs);
+        // console.log('observing jobs', jobs);
         this.jobs = jobs
       });
 
   }
+
 
 }

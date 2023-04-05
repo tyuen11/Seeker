@@ -45,8 +45,18 @@ export class JobService {
             })
         };
         const param = "?uid=" + uid;
-        return this.http.post<Job>(this.url + "/all" + param, {} , httpOptions)
+        return this.http.post<any>(this.url + "/all" + param, {} , httpOptions)
     }
 
+    removeJob(id: number) {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "localhost:52376"
+            })
+        };
+        const param = "?id=" + id;
+        return this.http.post<Job>(this.url + "/delete" + param, {} , httpOptions)
+    }
 
 }
