@@ -1,8 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Store } from "@ngrx/store";
-import { catchError, map, of, switchMap } from "rxjs";
+import { catchError, map, mergeMap, } from "rxjs";
 import { UserService } from "../services/user.service";
+import { getJobs } from "../store/job";
 import { SeekerState } from "../store/reducers";
 import { getUser, getUserSuccess } from "../store/user";
 
@@ -17,14 +18,13 @@ export class UserEffects {
     getUser$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(getUser),
-            switchMap(action => {
+            mergeMap(action => {
                 return this.userService.getUser(action.id).pipe(
                     map(user => { 
-                        console.log(user);
-                        return getUserSuccess({ user: user }) 
+                        return getUserSuccess({user: user}) 
                     }) 
                 )
-           } )
-        )
+            })
+        );
     });
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action, createAction, props } from '@ngrx/store';
-import { User } from './user.reducer';
+import { User } from 'src/app/interfaces';
 
 @Injectable()
 export class ActionTypes {

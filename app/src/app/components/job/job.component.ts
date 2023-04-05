@@ -1,9 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { Store } from '@ngrx/store';
 import { AddJobModalComponent } from '../modals/add-job-modal/add-job-modal.component';
 import { Job } from '../../interfaces';
 import { MatDialog } from '@angular/material/dialog';
+import { removeJob } from 'src/app/core/store/job';
+import { SeekerState } from 'src/app/core/store/reducers';
 
 @Component({
   selector: 'job',
@@ -11,16 +13,23 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./job.component.css']
 })
 
-export class JobComponent {
+export class JobComponent implements OnInit {
   @Input() job!: Job;
 
-  constructor(private router: Router, private jobModal: MatDialog) { }
+  constructor(private router: Router, private jobModal: MatDialog, private store: Store<SeekerState>) { }
 
+
+  ngOnInit(): void {
+    
+  }
+  
   goToUrl() {
-    // let route: string[] = ['/' + this.job.url];
-    console.log(this.job.url);
-    // this.router.navigate(route);
-    document.location.href = this.job.url;
+    window.location.href = 'https://' + this.job?.url; //Todo: Need to add https to the actual db
+  }
+
+  removeJob(): void {
+    console.log(this.job?.id);
+    if (this.job?.id !== undefined) this.store.dispatch(removeJob({id: this.job?.id}));
   }
 
   openDialog(): void {
@@ -28,8 +37,5 @@ export class JobComponent {
       data: {},
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
   }
 }

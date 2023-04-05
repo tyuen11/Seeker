@@ -1,8 +1,8 @@
 import { Store, createSelector } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { User } from 'src/app/interfaces';
 
 import { SeekerState } from '../reducers';
-import { User } from './user.reducer';
 
 export const selectUser = (state: SeekerState) => state.user;
 export const selectUserContainers = createSelector(selectUser, (user: User) => user.containers);

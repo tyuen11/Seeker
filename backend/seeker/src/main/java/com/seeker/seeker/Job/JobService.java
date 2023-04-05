@@ -20,6 +20,10 @@ public class JobService {
     
     }
 
+    public Job[] getJobs(Long uid) {
+        return jobRepository.selectUserJobs(uid);
+    }
+
     public void addJob(Job job) {
         Boolean existsJob = jobRepository.selectExistsJob(job.getId());
 

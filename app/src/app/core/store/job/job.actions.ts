@@ -8,6 +8,10 @@ export class ActionTypes {
     static ADD_JOB_SUCCESS = '[JOB] ADD JOB SUCCESS'
     static ADD_JOB_FAIL = '[JOB] ADD JOB FAIL'
     static GET_JOBS = '[JOB] GET JOBS'
+    static GET_JOBS_SUCCESS = '[JOB] GET JOBS SUCCESS'
+    static REMOVE_JOB = '[JOB] REMOVE JOB'
+    static REMOVE_JOB_SUCCESS = '[JOB] REMOVE JOB SUCCESS'
+
 
 }
 
@@ -18,10 +22,23 @@ export const addJob = createAction(
 
 export const getJobs = createAction(
     ActionTypes.GET_JOBS,
+    props<{uid: number}>()
+)
+
+export const getJobsSuccess = createAction(
+    ActionTypes.GET_JOBS_SUCCESS,
+    props<{jobs: Job[]}>()
+)
+
+export const addJobSuccess = createAction(
+    ActionTypes.ADD_JOB_SUCCESS,
+)
+
+export const removeJob = createAction(
+    ActionTypes.REMOVE_JOB,
     props<{id: number}>()
 )
 
-export const getJobSuccess = createAction(
-    ActionTypes.ADD_JOB_SUCCESS,
-    props<{payload: any}>()
+export const removeJobSuccess = createAction(
+    ActionTypes.REMOVE_JOB_SUCCESS
 )

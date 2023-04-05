@@ -1,5 +1,5 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import * as moment from 'moment-timezone';
@@ -20,7 +20,8 @@ export class AddJobModalComponent implements OnInit{
   jobForm: any;
   constructor(
     public dialogRef: MatDialogRef<AddJobModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {status: string, currentUser: number},
+    @Inject(MAT_DIALOG_DATA) 
+    public data: {status: string, currentUser: number},
     public formBuilder: FormBuilder,
     private store: Store<SeekerState>
   ) {
@@ -45,7 +46,7 @@ export class AddJobModalComponent implements OnInit{
   onSubmit(): void {
     let { company, jobTitle, dateApplied, postUrl } = this.jobForm;
     let job: Job = {
-      company: company.value,
+      companyName: company.value,
       position: jobTitle.value,
       dateApplied: dateApplied.value,
       status: this.status,
@@ -53,9 +54,10 @@ export class AddJobModalComponent implements OnInit{
       uid: this.currentUser
     };
 
-    console.log(job);
 
     this.store.dispatch(addJob({job: job}));
+    this.dialogRef.close();
+
 
   }
 }
