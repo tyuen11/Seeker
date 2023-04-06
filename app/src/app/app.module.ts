@@ -20,6 +20,7 @@ import { UserEffects } from './core/effects/user.effects';
 import { TextfieldComponent } from './components/common/textfield/textfield.component';
 import { DatetimePickerComponent } from './components/common/datetime-picker/datetime-picker.component';
 import { JobEffects } from './core/effects/job.effects';
+import { ConfirmationModalComponent } from './components/modals/confirmation-modal/confirmation-modal.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { JobEffects } from './core/effects/job.effects';
     AddJobModalComponent,
     TextfieldComponent,
     DatetimePickerComponent,
+    ConfirmationModalComponent,
   ],
   imports: [
     BrowserModule,

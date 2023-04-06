@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AddJobModalComponent } from '../modals/add-job-modal/add-job-modal.component';
+import { ConfirmationModalComponent } from '../modals/confirmation-modal/confirmation-modal.component';
 import { Job } from '../../interfaces';
 import { MatDialog } from '@angular/material/dialog';
 import { removeJob } from 'src/app/core/store/job';
@@ -16,20 +17,25 @@ import { SeekerState } from 'src/app/core/store/reducers';
 export class JobComponent implements OnInit {
   @Input() job!: Job;
 
-  constructor(private router: Router, private jobModal: MatDialog, private store: Store<SeekerState>) { }
+  constructor(
+    private router: Router,
+    private jobModal: MatDialog,
+    private store: Store<SeekerState>,
+    private deleteModal: MatDialog
+  ) { }
 
 
   ngOnInit(): void {
-    
+
   }
-  
+
   goToUrl() {
     window.location.href = 'https://' + this.job?.url; //Todo: Need to add https to the actual db
   }
 
-  removeJob(): void {
-    console.log(this.job?.id);
-    if (this.job?.id !== undefined) this.store.dispatch(removeJob({id: this.job?.id}));
+  removeJob(id: number): void {
+    if (this.job?.id !== undefined)
+      this.store.dispatch(removeJob({ id: this.job?.id }));
   }
 
   openDialog(): void {
@@ -37,5 +43,11 @@ export class JobComponent implements OnInit {
       data: {},
     });
 
+  }
+
+  openDeleteConfimationDialog(): void {
+    const dialogRef = this.deleteModal.open(ConfirmationModalComponent, {
+      data: {event: this.removeJob.bind(this)}
+    });
   }
 }
