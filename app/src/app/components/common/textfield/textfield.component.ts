@@ -19,10 +19,7 @@ export class TextfieldComponent implements OnInit{
 
   ngOnInit(): void {
     const validator = this.control.validator ? this.control.validator({} as AbstractControl) : null;
-    console.log(validator);
     this.required = !!validator && validator['required'];
-    console.log(this.required);
-
   }
 
   getErrorMessage(): string {

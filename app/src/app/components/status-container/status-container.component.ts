@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, CdkDragStart, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
 
 import { Job } from '../../interfaces';
@@ -18,6 +18,8 @@ export class StatusContainerComponent implements OnChanges {
   @Input() name!: string;
   @Input() currentUser!: number
   @Input() jobs!: Job[]
+  public dragging!: boolean;
+  private job: Job | undefined;
 
 
   constructor(public dialog: MatDialog) {
@@ -28,12 +30,23 @@ export class StatusContainerComponent implements OnChanges {
     this.jobs = this.jobs?.filter(j => j.status === this.name);
   }
 
+  public handleDragStart(event: CdkDragStart): void {
+    this.dragging = true;
+  }
+
+  public jobClick(event: MouseEvent, job: Job): void {
+    if (this.dragging) {
+      this.dragging = false;
+      return
+    }
+    this.job = job;
+    this.openDialog();
+  }
+
   drop(event: CdkDragDrop<Job[]>) {
-    console.log(event.previousContainer.id, event.container.id);
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      console.log('transfer', this.jobs)
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
@@ -45,13 +58,13 @@ export class StatusContainerComponent implements OnChanges {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(AddJobModalComponent, {
-      data: { status: this.name, currentUser: this.currentUser },
+      data: { status: this.name, currentUser: this.currentUser, job: this.job},
     });
 
     console.log(this.jobs)
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
+      this.job = undefined;
     });
   }
 }

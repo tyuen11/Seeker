@@ -5,12 +5,12 @@
             <mat-card-subtitle>{{job.companyName}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-actions class="col">
-            <div class="row container" >
+            <div class="row container">
                 <button mat-button class="col job-button" (click)="openDeleteConfimationDialog()">
                     <mat-icon aria-hidden="false" aria-label="Delete Job" fontIcon="delete"></mat-icon>
                 </button>
-                <button mat-button class="col job-button" (click)="goToUrl()">
-                    <mat-icon aria-hidden="false" aria-label="Delete Job" fontIcon="link"/>
+                <button mat-button class="col job-button" *ngIf="!!this.job.url" (click)="goToUrl()">
+                    <mat-icon aria-hidden="false" aria-label="Delete Job" fontIcon="link" />
                 </button>
             </div>
         </mat-card-actions>

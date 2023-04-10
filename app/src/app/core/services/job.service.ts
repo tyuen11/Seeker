@@ -3,7 +3,7 @@ import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment.dev";
 import { HttpHeaders } from '@angular/common/http';
 import { Job } from "src/app/interfaces";
-
+import { urlProtocolExists } from "src/app/utils";
 
 @Injectable({
     providedIn: 'root',
@@ -25,13 +25,15 @@ export class JobService {
             })
         };
         console.log(job);
-        
+
+        let url: string = urlProtocolExists(job.url) ? job.url : 'https://' + job.url
+
         const payload = {
             companyName: job.companyName,
             dateApplied: job.dateApplied,
             position: job.position,
             status: job.status,
-            url: job.url,
+            url: !!job.url ? url : '',
             userId: job.uid
         }
         return this.http.post<Job>(this.url + "/add", payload, httpOptions)
@@ -45,7 +47,7 @@ export class JobService {
             })
         };
         const param = "?uid=" + uid;
-        return this.http.post<any>(this.url + "/all" + param, {} , httpOptions)
+        return this.http.post<any>(this.url + "/all" + param, {}, httpOptions)
     }
 
     removeJob(id: number) {
@@ -56,7 +58,7 @@ export class JobService {
             })
         };
         const param = "?id=" + id;
-        return this.http.post<Job>(this.url + "/delete" + param, {} , httpOptions)
+        return this.http.post<Job>(this.url + "/delete" + param, {}, httpOptions)
     }
 
 }

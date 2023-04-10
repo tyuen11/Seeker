@@ -13,30 +13,36 @@ import { Job } from 'src/app/interfaces';
   templateUrl: './add-job-modal.component.html',
   styleUrls: ['./add-job-modal.component.css', '../../../app.component.css']
 })
-export class AddJobModalComponent implements OnInit{
+export class AddJobModalComponent implements OnInit {
   private status: string;
   private currentUser!: number;
+  public job!: Job;
+  public jobForm: any = {};
 
-  jobForm: any;
   constructor(
     public dialogRef: MatDialogRef<AddJobModalComponent>,
-    @Inject(MAT_DIALOG_DATA) 
-    public data: {status: string, currentUser: number},
+    @Inject(MAT_DIALOG_DATA)
+    public data: { status: string, currentUser: number, job: Job },
     public formBuilder: FormBuilder,
     private store: Store<SeekerState>
   ) {
-    this.jobForm = {
-      company: new FormControl('', [Validators.required]),
-      jobTitle: new FormControl('', [Validators.required]),
-      postUrl: new FormControl(''),
-      dateApplied: new FormControl(moment.tz(moment.tz.guess()).format('MM-DD-YYYYTHH:mm '))
-    };
     this.status = data.status;
     this.currentUser = data.currentUser;
+    this.loadJobData(data.job);
   }
 
   ngOnInit(): void {
     this.store.select(selectUserId);
+  }
+
+  loadJobData(job: Job): void {
+    this.jobForm = {
+      company: new FormControl(job?.companyName || '', [Validators.required]),
+      jobTitle: new FormControl(job?.position || '', [Validators.required]),
+      postUrl: new FormControl(job?.url || ''),
+      dateApplied: new FormControl(job?.dateApplied || moment.tz(moment.tz.guess()).format('YYYY-MM-DDTHH:mm'))
+    };
+    !!job ? this.job = job : null;
   }
 
   onNoClick(): void {
@@ -55,9 +61,8 @@ export class AddJobModalComponent implements OnInit{
     };
 
 
-    this.store.dispatch(addJob({job: job}));
+    this.store.dispatch(addJob({ job: job }));
     this.dialogRef.close();
-
-
+    this.dialogRef.beforeClosed().subscribe(() => this.jobForm = null);
   }
 }

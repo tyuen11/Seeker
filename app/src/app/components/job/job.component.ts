@@ -16,6 +16,7 @@ import { SeekerState } from 'src/app/core/store/reducers';
 
 export class JobComponent implements OnInit {
   @Input() job!: Job;
+  @Input() dragging!: boolean;
 
   constructor(
     private router: Router,
@@ -26,11 +27,12 @@ export class JobComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    console.log(this.dragging);
   }
-
+  
   goToUrl() {
-    window.location.href = 'https://' + this.job?.url; //Todo: Need to add https to the actual db
+    if (!!this.job.url)
+      window.location.href = this.job?.url;
   }
 
   removeJob(id: number): void {

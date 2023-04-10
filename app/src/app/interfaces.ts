@@ -3,9 +3,9 @@ export interface Job {
   companyName: string;
   position: string;
   url: string;
-  dateApplied: number,
-  status: string,
-  uid: number
+  dateApplied: number;
+  status: string;
+  uid: number;
 }
 
 
