@@ -1,9 +1,10 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 import { Store } from '@ngrx/store';
 import * as moment from 'moment-timezone';
-import { addJob } from 'src/app/core/store/job';
+import { addJob, updateJob } from 'src/app/core/store/job';
 import { SeekerState } from 'src/app/core/store/reducers';
 import { selectUserId } from 'src/app/core/store/user';
 import { Job } from 'src/app/interfaces';
@@ -18,6 +19,7 @@ export class AddJobModalComponent implements OnInit {
   private currentUser!: number;
   public job!: Job;
   public jobForm: any = {};
+  public submitText: String = "Save";
 
   constructor(
     public dialogRef: MatDialogRef<AddJobModalComponent>,
@@ -42,7 +44,10 @@ export class AddJobModalComponent implements OnInit {
       postUrl: new FormControl(job?.url || ''),
       dateApplied: new FormControl(job?.dateApplied || moment.tz(moment.tz.guess()).format('YYYY-MM-DDTHH:mm'))
     };
-    !!job ? this.job = job : null;
+    if (!!job) {
+      this.job = job;
+      this.submitText = "Update";
+    }
   }
 
   onNoClick(): void {
@@ -60,8 +65,12 @@ export class AddJobModalComponent implements OnInit {
       uid: this.currentUser
     };
 
-
-    this.store.dispatch(addJob({ job: job }));
+    if (!!this.job) {
+      job.id = this.job.id;
+      this.store.dispatch(updateJob({ job: job }));
+    } else {
+      this.store.dispatch(addJob({ job: job }));
+    }
     this.dialogRef.close();
     this.dialogRef.beforeClosed().subscribe(() => this.jobForm = null);
   }

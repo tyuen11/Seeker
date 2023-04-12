@@ -30,7 +30,8 @@ export class JobComponent implements OnInit {
     console.log(this.dragging);
   }
   
-  goToUrl() {
+  goToUrl($event: MouseEvent) {
+    $event.stopPropagation();
     if (!!this.job.url)
       window.location.href = this.job?.url;
   }
@@ -47,7 +48,8 @@ export class JobComponent implements OnInit {
 
   }
 
-  openDeleteConfimationDialog(): void {
+  openDeleteConfimationDialog($event: MouseEvent): void {
+    $event.stopPropagation();
     const dialogRef = this.deleteModal.open(ConfirmationModalComponent, {
       data: {event: this.removeJob.bind(this)}
     });

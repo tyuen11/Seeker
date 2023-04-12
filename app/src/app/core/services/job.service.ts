@@ -61,4 +61,27 @@ export class JobService {
         return this.http.post<Job>(this.url + "/delete" + param, {}, httpOptions)
     }
 
+    updateJob(job: Job) {
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "localhost:52376"
+            })
+        };
+
+        let url: string = urlProtocolExists(job.url) ? job.url : 'https://' + job.url
+
+        const payload = {
+            id: job.id,
+            companyName: job.companyName,
+            dateApplied: job.dateApplied,
+            position: job.position,
+            status: job.status,
+            url: !!job.url ? url : '',
+            userId: job.uid
+        }
+        return this.http.post<Job>(this.url + "/update", payload, httpOptions)
+    
+    }
+
 }

@@ -25,7 +25,7 @@ public class JobService {
     }
 
     public void addJob(Job job) {
-        Boolean existsJob = jobRepository.selectExistsJob(job.getId());
+        Boolean existsJob = jobRepository.selectExistsJob(job.getId()); // PERFORMANCE ISSUE? (https://stackoverflow.com/questions/11881479/how-do-i-update-an-entity-using-spring-data-jpa)
 
         if (existsJob) {
             throw new BadRequestException(
@@ -35,18 +35,18 @@ public class JobService {
         jobRepository.save(job);
     }
 
-    public void editJob(Long id, String attribute) {
-        if (!jobRepository.selectExistsJob(id)) {
-            throw new JobNotFoundException("Job with id " + id + " does not exist");
-        }
-        
-    }
-
     public void deleteJob(Long id) {
         if (!jobRepository.existsById(id)) {
             throw new JobNotFoundException("Job with id " + id + " does not exist");
         }
         jobRepository.deleteById((id));
+    }
+
+    public void updateJob(Job job) {
+        if (!jobRepository.selectExistsJob(job.getId())) {
+            throw new JobNotFoundException("Job with id " + job.getId() + " does not exist");
+        }
+        jobRepository.save(job);
     }
 
 }

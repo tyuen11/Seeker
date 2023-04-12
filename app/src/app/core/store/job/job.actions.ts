@@ -11,6 +11,8 @@ export class ActionTypes {
     static GET_JOBS_SUCCESS = '[JOB] GET JOBS SUCCESS'
     static REMOVE_JOB = '[JOB] REMOVE JOB'
     static REMOVE_JOB_SUCCESS = '[JOB] REMOVE JOB SUCCESS'
+    static UPDATE_JOB = '[JOB] UPDATE JOB'
+    static UPDATE_JOB_SUCCESS = '[JOB] UPDATE JOB SUCCESS'
 
 
 }
@@ -41,4 +43,13 @@ export const removeJob = createAction(
 
 export const removeJobSuccess = createAction(
     ActionTypes.REMOVE_JOB_SUCCESS
+)
+
+export const updateJob = createAction(
+    ActionTypes.UPDATE_JOB,
+    props<{job: Job}>()
+)
+
+export const updateJobSuccess = createAction(
+    ActionTypes.UPDATE_JOB_SUCCESS,
 )

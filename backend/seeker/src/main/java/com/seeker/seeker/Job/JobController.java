@@ -59,4 +59,15 @@ public class JobController {
         return mapper.writeValueAsString(res);
         
     }
+
+    @PostMapping(value="/update")
+    public String updateJob(@Valid @RequestBody Job job) throws JsonProcessingException {
+        jobService.updateJob(job);
+        Map<String, Object> res = new HashMap<>();
+        res.put("success", true);
+        res.put("data", null);
+        res.put("message", "Updating job was successful");
+        return mapper.writeValueAsString(res);
+
+    }
 }

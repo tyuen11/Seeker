@@ -6,10 +6,10 @@
         </mat-card-header>
         <mat-card-actions class="col">
             <div class="row container">
-                <button mat-button class="col job-button" (click)="openDeleteConfimationDialog()">
+                <button mat-button class="col job-button" (click)="openDeleteConfimationDialog($event)">
                     <mat-icon aria-hidden="false" aria-label="Delete Job" fontIcon="delete"></mat-icon>
                 </button>
-                <button mat-button class="col job-button" *ngIf="!!this.job.url" (click)="goToUrl()">
+                <button mat-button class="col job-button" *ngIf="!!this.job.url" (click)="goToUrl($event)">
                     <mat-icon aria-hidden="false" aria-label="Delete Job" fontIcon="link" />
                 </button>
             </div>
