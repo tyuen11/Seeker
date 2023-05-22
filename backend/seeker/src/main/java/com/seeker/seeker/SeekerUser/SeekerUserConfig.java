@@ -10,9 +10,9 @@ public class SeekerUserConfig {
     @Bean
     CommandLineRunner commandLineRunner(SeekerUserRepository repo) {
         return args -> {
-            SeekerUser user = new SeekerUser(
-                    "Test Testt",
-                    "test.testt@gmail.com");
+            // SeekerUser user = new SeekerUser(
+            //         "Test Testt",
+            //         "test.testt@gmail.com");
             // repo.save(user);
         };
     }

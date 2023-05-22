@@ -23,15 +23,27 @@ public class Job {
     private String status;
     private String url;
     private Long userId;
+    private String dateModified;
+    private String lexorank;
 
     public Job(){ super(); }
 
-    public Job(String companyName, String position, String status, String url, String dateApplied) {
+    public Job(
+        String companyName, 
+        String position, 
+        String status, 
+        String url, 
+        String dateApplied, 
+        String dateModified,
+        String lexorank
+    ) {
         this.companyName = companyName;
         this.position = position;
         this.status = status;
         this.dateApplied = dateApplied;
         this.url = url;
+        this.dateModified = dateModified;
+        this.lexorank = lexorank;
     }
 
     public Long getId() {
@@ -88,5 +100,21 @@ public class Job {
     
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getDateModified() {
+        return dateModified;
+    }
+
+    public void setDateModified(String dateModified) {
+        this.dateModified = dateModified;
+    }
+
+    public String getLexorank() {
+        return lexorank;
+    }
+
+    public void setLexorank(String lexorank) {
+        this.lexorank = lexorank;
     }
 }

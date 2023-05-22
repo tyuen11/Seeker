@@ -26,7 +26,6 @@ public class JobService {
 
     public void addJob(Job job) {
         Boolean existsJob = jobRepository.selectExistsJob(job.getId()); // PERFORMANCE ISSUE? (https://stackoverflow.com/questions/11881479/how-do-i-update-an-entity-using-spring-data-jpa)
-
         if (existsJob) {
             throw new BadRequestException(
                     "Job " + job.getId() + " taken");
