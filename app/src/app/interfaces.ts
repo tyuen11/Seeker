@@ -6,6 +6,8 @@ export interface Job {
   dateApplied: number;
   status: string;
   uid: number;
+  dateModified: string;
+  lexorank: string;
 }
 
 
