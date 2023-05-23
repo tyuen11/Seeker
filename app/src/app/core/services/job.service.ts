@@ -17,16 +17,16 @@ export class JobService {
     }
 
     addJob(job: Job) {
-        console.log(job);
+        // console.log(job);
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
                 "Access-Control-Allow-Origin": "localhost:52376"
             })
         };
-        console.log(job);
+        // console.log(job);
 
-        let url: string = urlProtocolExists(job.url) ? job.url : 'https://' + job.url
+        let url: string = urlProtocolExists(job.url) ? job.url : 'https://' + job.url;
 
         const payload = {
             companyName: job.companyName,
@@ -34,7 +34,8 @@ export class JobService {
             position: job.position,
             status: job.status,
             url: !!job.url ? url : '',
-            userId: job.uid
+            userId: job.uid,
+            dateModified: job.dateModified
         }
         return this.http.post<Job>(this.url + "/add", payload, httpOptions)
     }
@@ -69,7 +70,7 @@ export class JobService {
             })
         };
 
-        let url: string = urlProtocolExists(job.url) ? job.url : 'https://' + job.url
+        let url: string = urlProtocolExists(job.url) ? job.url : 'https://' + job.url;
 
         const payload = {
             id: job.id,
@@ -78,8 +79,11 @@ export class JobService {
             position: job.position,
             status: job.status,
             url: !!job.url ? url : '',
-            userId: job.uid
+            userId: job.uid,
+            dateModified: job.dateModified,
+            lexorank: job.lexorank,
         }
+        // console.log(payload);
         return this.http.post<Job>(this.url + "/update", payload, httpOptions)
     
     }

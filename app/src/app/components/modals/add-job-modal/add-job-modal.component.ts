@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 import { Store } from '@ngrx/store';
 import * as moment from 'moment-timezone';
-import { addJob, updateJob } from 'src/app/core/store/job';
+import { addJob, getJobs, updateJob } from 'src/app/core/store/job';
 import { SeekerState } from 'src/app/core/store/reducers';
 import { selectUserId } from 'src/app/core/store/user';
 import { Job } from 'src/app/interfaces';
@@ -62,7 +62,9 @@ export class AddJobModalComponent implements OnInit {
       dateApplied: dateApplied.value,
       status: this.status,
       url: postUrl.value,
-      uid: this.currentUser
+      uid: this.currentUser,
+      dateModified: moment.tz(moment.tz.guess()).format('YYYY-MM-DDTHH:mm:ss'),
+      lexorank: 'z', //TODO: CHANGE
     };
 
     if (!!this.job) {
@@ -71,6 +73,7 @@ export class AddJobModalComponent implements OnInit {
     } else {
       this.store.dispatch(addJob({ job: job }));
     }
+    this.store.dispatch(getJobs({uid: this.currentUser}));
     this.dialogRef.close();
     this.dialogRef.beforeClosed().subscribe(() => this.jobForm = null);
   }

@@ -3,7 +3,7 @@ import { Actions, ofType, createEffect } from '@ngrx/effects';
 import { Store } from "@ngrx/store";
 import { map, mergeMap, withLatestFrom } from "rxjs";
 import { JobService } from "../services/job.service";
-import { addJob, getJobs, getJobsSuccess, removeJob, updateJob } from "../store/job";
+import { addJob, getJobs, getJobsSuccess, removeJob, updateJob, updateJobSuccess } from "../store/job";
 import { SeekerState } from "../store/reducers";
 import { selectUserId } from "../store/user";
 
@@ -48,7 +48,7 @@ export class JobEffects {
                 return this.jobService.removeJob(action.id).pipe(
                     withLatestFrom(this.store.select(selectUserId)),
                     map(([res, uid]) => {
-                        console.log(res, uid);
+                        // console.log(res, uid);
                         return getJobs({uid: uid})
                     })
                 )
@@ -60,13 +60,13 @@ export class JobEffects {
         return this.actions$.pipe(
             ofType(updateJob),
             mergeMap(action => {
-                console.log(action.job);
+                // console.log(action.job);
                 return this.jobService.updateJob(action.job).pipe(
                     withLatestFrom(this.store.select(selectUserId)),
                     map(([res, uid]) => {
-                        console.log('dpatingadf')
                         console.log(res, uid);
-                        return getJobs({uid: uid})
+                        // return getJobs({uid: uid})
+                        return updateJobSuccess();
                     })
                 )
             })

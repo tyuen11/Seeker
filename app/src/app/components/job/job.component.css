@@ -5,3 +5,15 @@
 .job-button {
     justify-content: flex-end;
 }
+
+.x {
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: block;
+}
+
+.y {
+    overflow: hidden;
+}
