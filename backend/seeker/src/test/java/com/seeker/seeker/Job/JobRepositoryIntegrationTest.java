@@ -1,5 +1,4 @@
-package com.seeker.seeker.SeekerUser;
-
+package com.seeker.seeker.Job;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,27 +13,35 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class SeekerUserRepositoryIntegrationTest {
-    
+public class JobRepositoryIntegrationTest {
+
     @Autowired
-    private SeekerUserRepository usersRepository;
+    private JobRepository jobRepository;
+    private Job testJob;
 
     @BeforeEach
     public void setUp() {
-        SeekerUser johnDoe = new SeekerUser(
-            "John Doe",
-            "john.doe@gmail.com");
-        usersRepository.save(johnDoe);
+        testJob = new Job(
+                "Company XYZ",
+                "Software Engineer",
+                "Applied",
+                "https://example.com",
+                "2023-06-24",
+                "2023-06-24",
+                "A1");
+        jobRepository.save(testJob);
     }
 
     @AfterEach
     public void tearDown() throws Exception {
-        usersRepository.deleteAll();
+        jobRepository.deleteAll();
     }
 
     @Test
-    public void shouldSaveAndGetUserExistByEmail() throws Exception {
-        var johnDoeExists = usersRepository.selectExistsEmail("john.doe@gmail.com");
-        assertThat(johnDoeExists).isTrue();
+    public void shouldSaveAndGetJobExistById() throws Exception {
+        Boolean exists = jobRepository.selectExistsJob(testJob.getId());
+        assertThat(exists).isTrue();
+
     }
+    
 }
