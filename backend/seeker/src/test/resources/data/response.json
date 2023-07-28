@@ -1,0 +1,27 @@
+[
+    {
+        "name": "Google",
+        "domain": "google.com",
+        "logo": "https://logo.clearbit.com/google.com"
+    },
+    {
+        "name": "Googan Squad",
+        "domain": "googansquad.com",
+        "logo": "https://logo.clearbit.com/googansquad.com"
+    },
+    {
+        "name": "Google Fiber Webpass",
+        "domain": "webpass.net",
+        "logo": "https://logo.clearbit.com/webpass.net"
+    },
+    {
+        "name": "Google for Creators",
+        "domain": "creators.google",
+        "logo": "https://logo.clearbit.com/creators.google"
+    },
+    {
+        "name": "Googirl",
+        "domain": "googirl.jp",
+        "logo": "https://logo.clearbit.com/googirl.jp"
+    }
+]
