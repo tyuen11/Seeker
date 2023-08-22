@@ -1,9 +1,9 @@
 <div class="pt-1">
-    <mat-form-field hideRequiredMarker appearance="outline">
+    <mat-form-field hideRequiredMarker appearance="outline" [ngStyle]="{'width': width}">
       <mat-label>{{text}}</mat-label>
       <input matInput [formControl]="control">
       <mat-error *ngIf="required">{{getErrorMessage()}}</mat-error>
       <mat-hint *ngIf="required">Required</mat-hint>
     </mat-form-field>
   </div>
-  
+   

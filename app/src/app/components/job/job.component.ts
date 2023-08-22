@@ -28,6 +28,7 @@ export class JobComponent implements OnInit {
 
   ngOnInit(): void {
     // console.log(this.dragging);
+    console.log(this.job.companyName, this.job.lexorank);
   }
   
   goToUrl($event: MouseEvent) {

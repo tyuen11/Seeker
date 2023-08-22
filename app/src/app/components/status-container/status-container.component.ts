@@ -21,15 +21,15 @@ import { Lexorank } from 'src/app/utils/lexorank/lexorank';
 })
 
 export class StatusContainerComponent implements OnChanges {
-  @Input() name!: string;
-  @Input() currentUser!: number
-  @Input() jobs!: Job[]
+  @Input() name!: string;;
+  @Input() currentUser!: number;
+  @Input() jobs!: Job[];
   public dragging!: boolean;
   private job: Job | undefined;
+  public smallestRank!: string;
 
 
   constructor(public dialog: MatDialog, private store: Store<SeekerState>) {
-
   }
 
   ngOnChanges(): void {
@@ -45,7 +45,6 @@ export class StatusContainerComponent implements OnChanges {
         return -1;
       return 0;
     });
-    // console.log(this.jobs);
 
   }
 
@@ -85,9 +84,11 @@ export class StatusContainerComponent implements OnChanges {
 
     let prev: string  = event.container.data[event.currentIndex-1]?.lexorank || '';
     let next: string  = event.container.data[event.currentIndex+1]?.lexorank || '';
+    console.log(event);
     let r: (string | boolean)[] = rank.insert(prev, next);
-    movedJob.lexorank = "" + r[0];
     console.log(prev, next, r);
+    movedJob.lexorank = "" + r[0];
+    console.log(movedJob);
     
     this.store.dispatch(updateJob({ job: movedJob }));
 
@@ -95,9 +96,33 @@ export class StatusContainerComponent implements OnChanges {
   }
 
 
+  public determineJobRank(event: CdkDragDrop<Job[]>): Job {
+    let rank = new Lexorank();
+
+
+    let movedJob: Job = { ...event.container.data[event.currentIndex] };
+    movedJob.dateModified = moment.tz(moment.tz.guess()).format('YYYY-MM-DDTHH:mm:ss');
+    movedJob.status = event.container.id;
+    movedJob.uid = this.currentUser; // Needed to set the job's uid since this Job obj is direct copy from db which has no uid attr.
+
+    let prev: string  = event.container.data[event.currentIndex-1]?.lexorank || '';
+    let next: string  = event.container.data[event.currentIndex+1]?.lexorank || '';
+    console.log(prev, next);
+    let r: (string | boolean)[] = rank.insert(prev, next);
+    console.log(rank.insert('0', 'z'));
+    console.log(r);
+    movedJob.lexorank = "" + r[0];
+
+    console.log(prev, next, r);
+    return movedJob;
+
+  }
+
   public openDialog(): void {
+    console.log(this.smallestRank);
+    console.log(this.jobs);
     const dialogRef = this.dialog.open(AddJobModalComponent, {
-      data: { status: this.name, currentUser: this.currentUser, job: this.job },
+      data: { status: this.name, currentUser: this.currentUser, job: this.job, smallestRank: this.jobs[0]?.lexorank },
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -105,7 +130,4 @@ export class StatusContainerComponent implements OnChanges {
     });
   }
 
-  // public setRank(): void {
-  //   if 
-  // }
 }

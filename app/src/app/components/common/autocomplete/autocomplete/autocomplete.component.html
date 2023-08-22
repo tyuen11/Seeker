@@ -1,0 +1,21 @@
+<form class="pt-1">
+    <mat-form-field hideRequiredMarker appearance="outline" [ngStyle]="{'width': width}">
+        <mat-label>{{text}}</mat-label>
+        <input type="text" aria-label="Company" matInput [formControl]="control" [matAutocomplete]="auto"
+            (input)="f(control.value)">
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of options" (click)="onSelectOption(option)" [value]="option.name">
+                <img class="image" *ngIf="!!option.logo; else fallbackIcon" src="{{option.logo}}" height="20" />
+                <ng-template #fallbackIcon>
+                    <span #fallbackIcon class="material-symbols-outlined">
+                        company_icon
+                    </span>
+                </ng-template>
+                    <span class="overflow-ellipsis">{{option.name}}</span>
+                    <span>{{option.domain}}</span>
+            </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="required">{{getErrorMessage()}}</mat-error>
+      <mat-hint *ngIf="required">Required</mat-hint>
+    </mat-form-field>
+</form>

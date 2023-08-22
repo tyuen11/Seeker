@@ -8,6 +8,7 @@ export interface Job {
   uid: number;
   dateModified: string;
   lexorank: string;
+  companySite?: string;
 }
 
 

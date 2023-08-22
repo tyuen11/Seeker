@@ -11,6 +11,7 @@ export class TextfieldComponent implements OnInit{
   @Input() errorMessage!: string;
   @Input() name!: string;
   @Input() control!: FormControl
+  @Input() width!: string;
 
   required: boolean = false;
 

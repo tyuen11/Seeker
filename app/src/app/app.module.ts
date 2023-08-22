@@ -21,6 +21,7 @@ import { TextfieldComponent } from './components/common/textfield/textfield.comp
 import { DatetimePickerComponent } from './components/common/datetime-picker/datetime-picker.component';
 import { JobEffects } from './core/effects/job.effects';
 import { ConfirmationModalComponent } from './components/modals/confirmation-modal/confirmation-modal.component';
+import { AutocompleteComponent } from './components/common/autocomplete/autocomplete/autocomplete.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { ConfirmationModalComponent } from './components/modals/confirmation-mod
     TextfieldComponent,
     DatetimePickerComponent,
     ConfirmationModalComponent,
+    AutocompleteComponent
   ],
   imports: [
     BrowserModule,
@@ -43,7 +45,8 @@ import { ConfirmationModalComponent } from './components/modals/confirmation-mod
     EffectsModule.forRoot([UserEffects, JobEffects]),
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    // AutocompleteComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

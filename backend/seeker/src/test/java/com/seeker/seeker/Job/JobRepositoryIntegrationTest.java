@@ -25,10 +25,11 @@ public class JobRepositoryIntegrationTest {
                 "Company XYZ",
                 "Software Engineer",
                 "Applied",
-                "https://example.com",
+                "https://example.com/jobposting",
                 "2023-06-24",
                 "2023-06-24",
-                "A1");
+                "A1",
+                "example.com");
         jobRepository.save(testJob);
     }
 

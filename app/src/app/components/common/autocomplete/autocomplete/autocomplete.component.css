@@ -1,0 +1,13 @@
+.image {
+    vertical-align: middle;
+    margin-right: 10px;
+    width: 20px;
+    border-radius: 100%;
+}
+
+.overflow-ellipsis {
+    width: 90px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+

@@ -35,7 +35,9 @@ export class JobService {
             status: job.status,
             url: !!job.url ? url : '',
             userId: job.uid,
-            dateModified: job.dateModified
+            dateModified: job.dateModified,
+            companySite: job.companySite,
+            lexorank: job.lexorank
         }
         return this.http.post<Job>(this.url + "/add", payload, httpOptions)
     }
@@ -82,8 +84,9 @@ export class JobService {
             userId: job.uid,
             dateModified: job.dateModified,
             lexorank: job.lexorank,
+            companySite: job.companySite
+
         }
-        // console.log(payload);
         return this.http.post<Job>(this.url + "/update", payload, httpOptions)
     
     }

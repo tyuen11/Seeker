@@ -1,6 +1,9 @@
 <mat-card id='job' class='card-width container pointer' [ngStyle]="{'background-color': '#CB8AFF'}">
     <div class="row">
-        <mat-card-header class="col y" [ngStyle]="{'padding-bottom': '16px'}">
+        <div [ngStyle]="{'padding-top': '20px'}" class="col-2">
+            <img class="company-image" src="{{'https://logo.clearbit.com/' + job.companySite}}">
+        </div>
+        <mat-card-header class="col-6 y px-1s" [ngStyle]="{'padding-bottom': '16px'}">
             <mat-card-title class="x">{{job.position}}</mat-card-title>
             <mat-card-subtitle class="x">{{job.companyName}}</mat-card-subtitle>
         </mat-card-header>

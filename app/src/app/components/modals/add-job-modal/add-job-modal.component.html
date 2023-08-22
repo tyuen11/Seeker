@@ -1,30 +1,44 @@
+<div [ngStyle]="{'width': '500px'}">
 <h1 mat-dialog-title class="center">Add Job</h1>
 <div mat-dialog-content>
-    <div class="mb-2">
+    <!-- <div class="mb-2">
         <textfield 
             text="Company" 
             errorMessage="Please enter a value" 
             name="company" 
             [control]="jobForm.company"
         />
+    </div> -->
+    <div class="mb-2 center">
+        <autocomplete 
+            text="Company" 
+            errorMessage="Please enter a value" 
+            [control]="jobForm.company"
+            [f]="suggestCompany"
+            [options]="options"
+            width="400px"
+            (setSelectedCompany)="setSelectedCompany($event)"
+        />
     </div>
-    <div class="my-3">
+    <div class="my-3 center" >
         <textfield 
+            width="400px"
             text="Job Title" 
             errorMessage="Please enter a value" 
             name="jobTitle" 
             [control]="jobForm.jobTitle"
         />
     </div>
-    <div class="my-3">
+    <div class="my-3 center">
         <textfield 
+        width="400px"
         text="Post Url" 
         name="postUrl" 
         [control]="jobForm.postUrl"
         />
     </div>
-    <div>
-        <mat-form-field>
+    <div class="center">
+        <mat-form-field [ngStyle]="{'width': '400px'}">
             <input matInput 
                 type="datetime-local" 
                 placeholder="start date"
@@ -35,5 +49,7 @@
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="onNoClick()">Cancel</button>
-    <button mat-button (click)="onSubmit()">{{this.submitText}}</button>
+    <button mat-button [disabled]="disableSubmit()" (click)="onSubmit()">{{this.submitText}}</button>
+</div>
+
 </div>

@@ -25,7 +25,7 @@ public class Job {
     private Long userId;
     private String dateModified;
     private String lexorank;
-
+    private String companySite;
     public Job(){ super(); }
 
     public Job(
@@ -35,7 +35,8 @@ public class Job {
         String url, 
         String dateApplied, 
         String dateModified,
-        String lexorank
+        String lexorank,
+        String companySite
     ) {
         this.companyName = companyName;
         this.position = position;
@@ -44,6 +45,7 @@ public class Job {
         this.url = url;
         this.dateModified = dateModified;
         this.lexorank = lexorank;
+        this.companySite = companySite;
     }
 
     public Long getId() {
@@ -117,4 +119,13 @@ public class Job {
     public void setLexorank(String lexorank) {
         this.lexorank = lexorank;
     }
+
+    public String getCompanySite() {
+        return companySite;
+    }
+
+    public void setCompanySite(String companySite) {
+        this.companySite = companySite;
+    }
+
 }
