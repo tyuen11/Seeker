@@ -1,7 +1,8 @@
 <mat-card id='job' class='card-width container pointer' [ngStyle]="{'background-color': '#CB8AFF'}">
     <div class="row">
         <div [ngStyle]="{'padding-top': '20px'}" class="col-2">
-            <img class="company-image" src="{{'https://logo.clearbit.com/' + job.companySite}}">
+            <img class="company-image" *ngIf="job.companySite; else altImage"
+                src="{{'https://logo.clearbit.com/' + job.companySite}}">
         </div>
         <mat-card-header class="col-6 y px-1s" [ngStyle]="{'padding-bottom': '16px'}">
             <mat-card-title class="x">{{job.position}}</mat-card-title>
@@ -19,3 +20,9 @@
         </mat-card-actions>
     </div>
 </mat-card>
+
+<ng-template #altImage>
+    <span class="material-symbols-outlined">
+        corporate_fare
+    </span>
+    </ng-template>
