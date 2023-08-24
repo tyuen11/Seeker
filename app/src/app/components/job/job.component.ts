@@ -33,17 +33,17 @@ export class JobComponent implements OnInit {
   
   goToUrl($event: MouseEvent) {
     $event.stopPropagation();
-    if (!!this.job.url)
+    if (this.job.url)
       window.location.href = this.job?.url;
   }
 
-  removeJob(id: number): void {
+  removeJob(): void {
     if (this.job?.id !== undefined)
       this.store.dispatch(removeJob({ id: this.job?.id }));
   }
 
   openDialog(): void {
-    const dialogRef = this.jobModal.open(AddJobModalComponent, {
+    this.jobModal.open(AddJobModalComponent, {
       data: {},
     });
 
@@ -51,7 +51,7 @@ export class JobComponent implements OnInit {
 
   openDeleteConfimationDialog($event: MouseEvent): void {
     $event.stopPropagation();
-    const dialogRef = this.deleteModal.open(ConfirmationModalComponent, {
+    this.deleteModal.open(ConfirmationModalComponent, {
       data: {event: this.removeJob.bind(this)}
     });
   }

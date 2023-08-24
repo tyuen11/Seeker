@@ -9,7 +9,6 @@ import { updateJob } from 'src/app/core/store/job';
 
 import * as moment from 'moment';
 import { SeekerState } from 'src/app/core/store/reducers';
-import { compareAsc } from 'src/app/utils';
 import { Lexorank } from 'src/app/utils/lexorank/lexorank';
 
 
@@ -21,7 +20,7 @@ import { Lexorank } from 'src/app/utils/lexorank/lexorank';
 })
 
 export class StatusContainerComponent implements OnChanges {
-  @Input() name!: string;;
+  @Input() name!: string;
   @Input() currentUser!: number;
   @Input() jobs!: Job[];
   public dragging!: boolean;
@@ -38,7 +37,7 @@ export class StatusContainerComponent implements OnChanges {
   }
 
   public sortByRank(): void {
-    this.jobs.sort((a: any, b: any) => {
+    this.jobs.sort((a: Job, b: Job) => {
       if (a.lexorank > b.lexorank)
         return 1;
       if (a.lexorank < b.lexorank)
@@ -49,10 +48,12 @@ export class StatusContainerComponent implements OnChanges {
   }
 
   public handleDragStart(event: CdkDragStart): void {
+    console.log(event);
     this.dragging = true;
   }
 
   public jobClick(event: MouseEvent, job: Job): void {
+    console.log(event);
     if (this.dragging) {
       this.dragging = false;
       return
@@ -74,21 +75,19 @@ export class StatusContainerComponent implements OnChanges {
       );
     }
 
-    let rank = new Lexorank();
+    const rank = new Lexorank();
 
 
-    let movedJob: Job = { ...event.container.data[event.currentIndex] };
+    const movedJob: Job = { ...event.container.data[event.currentIndex] };
     movedJob.dateModified = moment.tz(moment.tz.guess()).format('YYYY-MM-DDTHH:mm:ss');
     movedJob.status = event.container.id;
     movedJob.uid = this.currentUser; // Needed to set the job's uid since this Job obj is direct copy from db which has no uid attr.
 
-    let prev: string  = event.container.data[event.currentIndex-1]?.lexorank || '';
-    let next: string  = event.container.data[event.currentIndex+1]?.lexorank || '';
+    const prev: string  = event.container.data[event.currentIndex-1]?.lexorank || '';
+    const next: string  = event.container.data[event.currentIndex+1]?.lexorank || '';
     console.log(event);
-    let r: (string | boolean)[] = rank.insert(prev, next);
-    console.log(prev, next, r);
+    const r: (string | boolean)[] = rank.insert(prev, next);
     movedJob.lexorank = "" + r[0];
-    console.log(movedJob);
     
     this.store.dispatch(updateJob({ job: movedJob }));
 
@@ -97,18 +96,18 @@ export class StatusContainerComponent implements OnChanges {
 
 
   public determineJobRank(event: CdkDragDrop<Job[]>): Job {
-    let rank = new Lexorank();
+    const rank = new Lexorank();
 
 
-    let movedJob: Job = { ...event.container.data[event.currentIndex] };
+    const movedJob: Job = { ...event.container.data[event.currentIndex] };
     movedJob.dateModified = moment.tz(moment.tz.guess()).format('YYYY-MM-DDTHH:mm:ss');
     movedJob.status = event.container.id;
     movedJob.uid = this.currentUser; // Needed to set the job's uid since this Job obj is direct copy from db which has no uid attr.
 
-    let prev: string  = event.container.data[event.currentIndex-1]?.lexorank || '';
-    let next: string  = event.container.data[event.currentIndex+1]?.lexorank || '';
+    const prev: string  = event.container.data[event.currentIndex-1]?.lexorank || '';
+    const next: string  = event.container.data[event.currentIndex+1]?.lexorank || '';
     console.log(prev, next);
-    let r: (string | boolean)[] = rank.insert(prev, next);
+    const r: (string | boolean)[] = rank.insert(prev, next);
     console.log(rank.insert('0', 'z'));
     console.log(r);
     movedJob.lexorank = "" + r[0];
@@ -126,6 +125,7 @@ export class StatusContainerComponent implements OnChanges {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
       this.job = undefined;
     });
   }
